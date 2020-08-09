@@ -1,42 +1,15 @@
 from pytube import YouTube
-from tkinter import *
-from tkinter import messagebox
-from tkinter.filedialog import *
 
-file_size = 0
+url = 'https://www.youtube.com/watch?v=khJlrj3Y6Ls'
 
-def startDownload(url):
-    global file_size
+you = YouTube(url)
+# print(you.streams.all())
+# getting all the streams
+allStreams = you.streams.all()
+# for stream in you.streams.all():
+#     print(stream)
 
-    path = askdirectory()
-    try:
-        if path is None:
-            return
+print(allStreams[1])
 
-        obj = YouTube(url)
+allStreams[1].download('C:\\Users\\USER\\Desktop\\pytube videos')
 
-    # print(obj.title)
-    # print(obj.streams.filter(only_audio=True))
-    # print(obj.streams.filter(res="720p"))
-        a = obj.streams.first() 
-        a.download(path)
-    except Exception as e:
-        print(e)
-        print("some error occured")
-
-# for i in a:
-#     print(i)
-
-# print(a.title)
-# print((a.filesize))
-
-#creating GUI
-root = Tk()
-root.geometry("500x500")
-root.title("Sahil's Youtube downloader  ")
-# root.iconbitmap("you.ico")
-# photo 
-file = PhotoImage(file="you.jpg")
-headIcon = Label(root,Image=file)
-headIcon.pack(side=TOP)
-root.mainloop()
